@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Username</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .username-card {
+            max-width: 500px;
+            margin: 80px auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            background-color: #fdfdfd;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="username-card">
+        <h4 class="text-center mb-4">👋 Welcome! Set Your Username</h4>
+
+        <form method="post" action="/submitUsername">
+            <div class="mb-3">
+                <label for="username" class="form-label">Choose a unique username</label>
+                <input type="text" class="form-control" id="username" name="username" required placeholder="e.g. john_doe">
+            </div>
+
+            {% if user_names %}
+            <div class="alert alert-warning">
+                <strong>Note:</strong> Usernames already taken:
+                <ul class="mb-0">
+                    {% for name in user_names %}
+                        <li>{{ name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            {% if error_message %}
+            <div class="alert alert-danger text-center">
+                {{ error_message }}
+            </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-success w-100">✅ Set Username</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
